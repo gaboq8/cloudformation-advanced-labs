@@ -75,7 +75,8 @@ In this lab, you will create a custom resource that generates an SSH key and sto
 
    - Responses are sent to the CloudFormation endpoints as HTTPS PUTs. This code snippet uses urllib, which is a part of the Python 3 standard library.
 
-    ```python
+
+      ```python
       def send_response(event, context, response):
           "Send a response to CloudFormation to handle the custom resource lifecycle"
       
@@ -110,7 +111,7 @@ In this lab, you will create a custom resource that generates an SSH key and sto
                   'response to AWS CloudFormation')
       
           return True
-    ```
+      ```
 
 7. Go to **Permissions** tab,  click **Edit**, and then click on the link at the bottom **View the XXXX role on the IAM console**, click on the **AWSLambdaBasicExecutionRole-XXXXX**, click on the **Edit Policy** button, go to the **JSON** tab and paste in the policy from [lambda\_policy.json](lambda_policy.json). 
 
@@ -398,7 +399,7 @@ For the sake of simplicity, we will be utilizing one account as both the adminis
 
 3. Click **Create Stack**
 
-4. Select **Upload a template to Amazon S3** and upload the [mapping\_stacksets\_iam.yml](mapping_stacksets_iam.yml) CloudFormation template. 
+4. Select **Upload a template file** and upload the [mapping\_stacksets\_iam.yml](mapping_stacksets_iam.yml) CloudFormation template. 
     1. Examine the CloudFormation template to see that it is a simple nested CloudFormation template that will call two AWS-provided YAML files to provision IAM roles within your account. 
     
         ```yaml
@@ -450,7 +451,7 @@ For the sake of simplicity, we will be utilizing one account as both the adminis
 
 2. Click **Create StackSet**.
 
-3. Examine the AWS-provided CloudFormation sample templates to get an idea of what configuration operations are possible with StackSets and then click **Upload a template to Amazon S3**. 
+3. Examine the AWS-provided CloudFormation sample templates to get an idea of what configuration operations are possible with StackSets and then click **Upload a template file**. 
 
 4. Click **Browse**, then upload [mapping\_stacksets\_ec2.yml](mapping_stacksets_ec2.yml) and then click **Next**.
 
