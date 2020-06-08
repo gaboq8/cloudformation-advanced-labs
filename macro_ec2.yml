@@ -31,7 +31,7 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: Cfn-Workshop-Reinvent-2018-Lab2
+          Value: Cfn-Workshop-Lab2
   EC2InstanceProfile:
       Type: AWS::IAM::InstanceProfile
       Properties:
