@@ -36,7 +36,7 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: Cfn-Workshop-Reinvent-2018-Lab1
+          Value: Cfn-Workshop-Lab1
     DependsOn: SSHKeyCR
   EC2InstanceProfile:
       Type: AWS::IAM::InstanceProfile
