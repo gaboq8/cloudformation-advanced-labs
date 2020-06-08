@@ -18,50 +18,11 @@ In this lab, you will create a custom resource that generates an SSH key and sto
 
 4. Choose Python 3.6 as the **Runtime**
 
-5. Choose **Create a Custom Role**. A new tab will open. 
+5. Choose **Create a new role with basic Lambda permissions**.  
 
-6. Give the role a name such as 'ssh-key-gen-role', expand **View Policy Document**, click **Edit**, and paste in the policy from [lambda\_policy.json](lambda_policy.json). 
+6. Click **Create Function**, copy the ARN at the top right of the screen and then paste in the code from [custom\_resource\_lambda.py](custom_resource_lambda.py) into the editor.
 
-7. **Click Allow** to associate the new role with the lambda function.
-
-   1. Examine the policy to see what permissions we are granting to the new function
-
-      ```json
-      {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "logs:CreateLogGroup",
-                      "logs:CreateLogStream",
-                      "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-              },
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "ec2:CreateKeyPair",
-                      "ec2:DescribeKeyPairs",
-                      "ssm:PutParameter"
-                  ],
-                  "Resource": "*"
-              },
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "ec2:DeleteKeyPair",
-                      "ssm:DeleteParameter"
-                  ],
-                  "Resource": "*"
-              }
-          ]
-      }
-      
-      ```
-
-8. Click **Create Function** and then paste in the code from [custom\_resource\_lambda.py](custom_resource_lambda.py) into the editor.
+![](arn.png)
 
    1. Examine the function to see what we are doing to implement the custom resource.
 
@@ -151,13 +112,54 @@ In this lab, you will create a custom resource that generates an SSH key and sto
           return True
     ```
 
-9. Click **Save** to save the function. Copy the ARN at the top right of the screen.
+7. Go to **Permissions** tab,  click **Edit**, and then click on the link at the bottom **View the XXXX role on the IAM console**, click on the **AWSLambdaBasicExecutionRole-XXXXX**, click on the **Edit Policy** button, go to the **JSON** tab and paste in the policy from [lambda\_policy.json](lambda_policy.json). 
 
-![](arn.png)
+8. **Click Review Policy**.
+
+   1. Examine the policy to see what permissions we are granting to the new function
+
+      ```json
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "logs:CreateLogGroup",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateKeyPair",
+                      "ec2:DescribeKeyPairs",
+                      "ssm:PutParameter"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:DeleteKeyPair",
+                      "ssm:DeleteParameter"
+                  ],
+                  "Resource": "*"
+              }
+          ]
+      }
+      
+      ```
+
+9. Click **Save Changes** to save the policy. 
+
+10. Go back to Lambda console and click **Save** on the orange button at the top right.
 
 11. Go to the CloudFormation console and click **Create Stack**
 
-12. Select **Upload a template to Amazon S3** and upload [custom\_resource\_cfn.yml](custom_resource_cfn.yml) 
+12. Select **Upload a template file** and upload [custom\_resource\_cfn.yml](custom_resource_cfn.yml) 
 
     1. Examine the CloudFormation template to see how a custom resource is configured.
 
@@ -190,13 +192,15 @@ In this lab, you will create a custom resource that generates an SSH key and sto
         --query Parameter.Value --output text > ~/.ssh/MyKey01.pem
     
     chmod 600 ~/.ssh/MyKey01.pem
-    
-    ssh -i ~/.ssh/MyKey01.pem ec2-user@<PUBLIC DNS>
     ```
 
 20. **NOTE that this is a private key, and in a production setting you must take steps to ensure that this key is not compromised!**
 
 21. Log in to the newly created EC2 instance to confirm that the key was associated with the instance.
+
+    ```bash
+    ssh -i ~/.ssh/MyKey01.pem ec2-user@<PUBLIC DNS>
+    ```
 
 22. Delete the stack and the lambda function.
 
