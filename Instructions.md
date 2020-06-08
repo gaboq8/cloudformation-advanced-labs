@@ -682,7 +682,7 @@ One option to recover a stack from a **DRIFTED** state is modifying its resource
 
 9. Select drift-lab-with-sqs on the CloudFormation Stacks view, click **Actions** and **Update Stack**.
 
-10. Select **Upload a template to Amazon S3** and upload your locally edited template my_cfn_stack.yml
+10. Select **Replace current template** and then **Upload a template file** and upload your locally edited template my_cfn_stack.yml
 
 11. Click **Next** on the **Select Template** screen, then click **Next** on the next two pages, and finally click **Update** on the review page.
 
