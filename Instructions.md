@@ -690,6 +690,8 @@ One option to recover a stack from a **DRIFTED** state is modifying its resource
 
 13. When complete, the dialog result will show the status as **IN_SYNC**.
 
+**THIS IS THE END OF THIS LAB**
+
 
 
 
