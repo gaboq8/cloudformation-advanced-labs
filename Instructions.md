@@ -24,7 +24,7 @@ In this lab, you will create a custom resource that generates an SSH key and sto
 
 ![](arn.png)
 
-   1. Examine the function to see what we are doing to implement the custom resource.
+   - Examine the function to see what we are doing to implement the custom resource.
 
       Every lambda function has a handler that is called by the lambda environment in response to a trigger.
 
@@ -73,7 +73,7 @@ In this lab, you will create a custom resource that generates an SSH key and sto
       
       ```
 
-   2. Responses are sent to the CloudFormation endpoints as HTTPS PUTs. This code snippet uses urllib, which is a part of the Python 3 standard library.
+   - Responses are sent to the CloudFormation endpoints as HTTPS PUTs. This code snippet uses urllib, which is a part of the Python 3 standard library.
 
     ```python
       def send_response(event, context, response):
@@ -116,7 +116,7 @@ In this lab, you will create a custom resource that generates an SSH key and sto
 
 8. **Click Review Policy**.
 
-   1. Examine the policy to see what permissions we are granting to the new function
+   - Examine the policy to see what permissions we are granting to the new function
 
       ```json
       {
@@ -161,7 +161,7 @@ In this lab, you will create a custom resource that generates an SSH key and sto
 
 12. Select **Upload a template file** and upload [custom\_resource\_cfn.yml](custom_resource_cfn.yml) 
 
-    1. Examine the CloudFormation template to see how a custom resource is configured.
+    - Examine the CloudFormation template to see how a custom resource is configured.
 
      ```yaml
        Resources:
